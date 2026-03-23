@@ -23,7 +23,7 @@
         <ImageView
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:src="@android:drawable/ic_menu_search"
+            android:src="@drawable/search_ic"
             app:tint="#1A237E" />
     </LinearLayout>
 
@@ -36,10 +36,11 @@
         app:cardElevation="0dp"
         app:cardBackgroundColor="#E8EAF6">
         <TextView
+            android:id="@+id/tvMonthlyExpenses"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="16dp"
-            android:text="Wydatki w tym miesiącu: -1 250,00 PLN"
+            android:text="Wydatki w tym miesiącu: 0,00 PLN"
             android:textColor="#1A237E"
             android:textStyle="bold" />
     </androidx.cardview.widget.CardView>

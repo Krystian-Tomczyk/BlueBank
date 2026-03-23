@@ -68,7 +68,7 @@
                     android:focusable="true"
                     android:foreground="?android:attr/selectableItemBackground">
                     <LinearLayout android:gravity="center" android:orientation="vertical" android:layout_width="match_parent" android:layout_height="match_parent">
-                        <ImageView android:layout_width="32dp" android:layout_height="32dp" android:src="@android:drawable/ic_dialog_info" app:tint="#1A237E"/>
+                        <ImageView android:layout_width="32dp" android:layout_height="32dp" android:src="@drawable/blik_ic" app:tint="#1A237E"/>
                         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="BLIK" android:layout_marginTop="8dp" android:textColor="#1A237E" android:textStyle="bold" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
@@ -85,7 +85,7 @@
                     android:focusable="true"
                     android:foreground="?android:attr/selectableItemBackground">
                     <LinearLayout android:gravity="center" android:orientation="vertical" android:layout_width="match_parent" android:layout_height="match_parent">
-                        <ImageView android:layout_width="32dp" android:layout_height="32dp" android:src="@android:drawable/ic_menu_send" app:tint="#1A237E"/>
+                        <ImageView android:layout_width="32dp" android:layout_height="32dp" android:src="@drawable/transfer_ic" app:tint="#1A237E"/>
                         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Przelew" android:layout_marginTop="8dp" android:textColor="#1A237E" android:textStyle="bold" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
@@ -102,7 +102,7 @@
                     android:focusable="true"
                     android:foreground="?android:attr/selectableItemBackground">
                     <LinearLayout android:gravity="center" android:orientation="vertical" android:layout_width="match_parent" android:layout_height="match_parent">
-                        <ImageView android:layout_width="32dp" android:layout_height="32dp" android:src="@android:drawable/ic_menu_recent_history" app:tint="#1A237E"/>
+                        <ImageView android:layout_width="32dp" android:layout_height="32dp" android:src="@drawable/history_ic" app:tint="#1A237E"/>
                         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Historia" android:layout_marginTop="8dp" android:textColor="#1A237E" android:textStyle="bold" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
@@ -119,7 +119,7 @@
                     android:focusable="true"
                     android:foreground="?android:attr/selectableItemBackground">
                     <LinearLayout android:gravity="center" android:orientation="vertical" android:layout_width="match_parent" android:layout_height="match_parent">
-                        <ImageView android:layout_width="32dp" android:layout_height="32dp" android:src="@android:drawable/ic_menu_manage" app:tint="#1A237E"/>
+                        <ImageView android:layout_width="32dp" android:layout_height="32dp" android:src="@drawable/settings_ic" app:tint="#1A237E"/>
                         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Ustawienia" android:layout_marginTop="8dp" android:textColor="#1A237E" android:textStyle="bold" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
@@ -140,6 +140,14 @@
                 android:layout_marginHorizontal="24dp"
                 android:layout_marginTop="8dp"
                 android:background="#E0E0E0" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvTransactions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:paddingHorizontal="16dp"
+                android:nestedScrollingEnabled="false" />
 
         </LinearLayout>
     </ScrollView>
