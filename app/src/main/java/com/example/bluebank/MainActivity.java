@@ -20,7 +20,7 @@ import java.io.IOException;
 public class MainActivity extends AppCompatActivity {
 
     // Upewnij się, że to IP jest zgodne z IPv4 Twojego komputera
-    private final String BANK_URL = "http://192.168.0.102:8081/api/bank";
+    private final String BANK_URL = "http://192.168.0.138:8081/api/bank";
     private OkHttpClient client;
 
     @Override
