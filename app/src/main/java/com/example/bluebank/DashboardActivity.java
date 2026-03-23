@@ -6,11 +6,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -20,35 +25,53 @@ import okhttp3.Response;
 
 public class DashboardActivity extends AppCompatActivity {
 
-    private final String BANK_URL = "http://192.168.0.102:8081/api/bank";
+    private final String BANK_URL = "http://192.168.0.138:8081/api/bank";
     private String accountNumber;
     private TextView tvBalance;
     private SwipeRefreshLayout swipeRefresh;
     private OkHttpClient client = new OkHttpClient();
+
+    private RecyclerView rvTransactions;
+    private TransactionAdapter adapter;
+    private List<BankTransaction> transactionList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
 
-        // Pobranie numeru konta przekazanego przy logowaniu
+        // 1. Pobranie numeru konta przekazanego przy logowaniu
         accountNumber = getIntent().getStringExtra("ACCOUNT_NUMBER");
 
-        // Inicjalizacja widoków
+        // 2. Inicjalizacja widoków podstawowych
         tvBalance = findViewById(R.id.tvBalance);
         swipeRefresh = findViewById(R.id.swipeRefresh);
 
-        // Ustawienie koloru animacji odświeżania
+        // 3. Konfiguracja RecyclerView dla historii transakcji
+        rvTransactions = findViewById(R.id.rvTransactions);
+        rvTransactions.setLayoutManager(new LinearLayoutManager(this));
+
+        // Zapobiega "skakaniu" ScrollView przy ładowaniu listy
+        rvTransactions.setNestedScrollingEnabled(false);
+
+        adapter = new TransactionAdapter(transactionList);
+        rvTransactions.setAdapter(adapter);
+
+        // 4. Ustawienie koloru animacji odświeżania
         swipeRefresh.setColorSchemeResources(android.R.color.holo_blue_dark);
 
-        // Obsługa gestu "Swipe to Refresh"
-        swipeRefresh.setOnRefreshListener(this::fetchBalance);
+        // 5. Obsługa gestu "Swipe to Refresh" - odświeżamy obie rzeczy na raz
+        swipeRefresh.setOnRefreshListener(() -> {
+            fetchBalance();
+            fetchHistory();
+        });
 
-        // Inicjalizacja przycisków menu
+        // 6. Inicjalizacja przycisków menu
         initMenu();
 
-        // Pierwsze pobranie salda przy wejściu na ekran
+        // 7. Pierwsze pobranie danych przy wejściu na ekran
         fetchBalance();
+        fetchHistory();
     }
 
     private void initMenu() {
@@ -65,11 +88,13 @@ public class DashboardActivity extends AppCompatActivity {
 
         cardTransfer.setOnClickListener(v -> {
             Intent intent = new Intent(DashboardActivity.this, TransferActivity.class);
+            intent.putExtra("ACCOUNT_NUMBER", accountNumber);
             startActivity(intent);
         });
 
         cardHistory.setOnClickListener(v -> {
             Intent intent = new Intent(DashboardActivity.this, HistoryActivity.class);
+            intent.putExtra("ACCOUNT_NUMBER", accountNumber);
             startActivity(intent);
         });
 
@@ -114,6 +139,47 @@ public class DashboardActivity extends AppCompatActivity {
                     }
                 } else {
                     runOnUiThread(() -> swipeRefresh.setRefreshing(false));
+                }
+            }
+        });
+    }
+
+    private void fetchHistory() {
+        Request request = new Request.Builder()
+                .url(BANK_URL + "/transactions/" + accountNumber) // Twój endpoint
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) { /* obsługa błędu */ }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if (response.isSuccessful() && response.body() != null) {
+                    try {
+                        String json = response.body().string();
+                        JSONArray array = new JSONArray(json);
+                        transactionList.clear();
+
+                        for (int i = 0; i < array.length(); i++) {
+                            JSONObject obj = array.getJSONObject(i);
+
+                            // ZMIANA TUTAJ: Zamiast "title" dajemy "description"
+                            String titleFromApi = obj.optString("description", "Brak tytułu");
+                            String amountFromApi = obj.optString("amount", "0.00");
+                            String typeFromApi = obj.optString("type", "OUTCOME");
+
+                            transactionList.add(new BankTransaction(
+                                    titleFromApi,
+                                    amountFromApi,
+                                    typeFromApi
+                            ));
+                        }
+
+                        runOnUiThread(() -> adapter.notifyDataSetChanged());
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         });
