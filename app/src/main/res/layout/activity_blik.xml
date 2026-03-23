@@ -70,6 +70,7 @@
         android:orientation="vertical">
 
         <Button
+            android:id="@+id/przelewBlikButton"
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:text="Przelew na telefon"

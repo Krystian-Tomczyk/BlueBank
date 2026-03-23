@@ -10,72 +10,46 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Nowy przelew"
-        android:textSize="24sp"
+        android:text="Przelew na telefon BLIK"
+        android:textSize="22sp"
         android:textStyle="bold"
         android:textColor="#1A237E"
-        android:layout_marginBottom="24dp" />
+        android:layout_marginBottom="32dp"/>
 
-    <androidx.cardview.widget.CardView
+    <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="24dp"
-        app:cardElevation="2dp">
+        android:hint="Numer telefonu odbiorcy"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
-        <LinearLayout
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etTargetPhone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="20dp">
+            android:inputType="phone" />
+    </com.google.android.material.textfield.TextInputLayout>
 
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:hint="Nazwa odbiorcy"
-                android:background="@android:color/transparent"
-                android:textSize="16sp" />
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Kwota (PLN)"
+        android:layout_marginTop="16dp"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
-            <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#F0F0F0" android:layout_marginVertical="8dp"/>
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:hint="Numer konta"
-                android:inputType="number"
-                android:background="@android:color/transparent"
-                android:textSize="16sp" />
-
-            <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#F0F0F0" android:layout_marginVertical="8dp"/>
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:hint="Tytuł przelewu"
-                android:background="@android:color/transparent"
-                android:textSize="16sp" />
-
-            <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#F0F0F0" android:layout_marginVertical="8dp"/>
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:hint="Kwota (PLN)"
-                android:inputType="numberDecimal"
-                android:background="@android:color/transparent"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etTransferAmount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/btnSendTransfer"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:text="WYŚLIJ PRZELEW"
         android:layout_marginTop="32dp"
+        android:text="WYŚLIJ PRZELEW"
         android:backgroundTint="#1A237E"
-        android:textColor="#FFFFFF"
-        android:textStyle="bold"
-        app:cornerRadius="20dp" />
+        app:cornerRadius="16dp" />
 
 </LinearLayout>
