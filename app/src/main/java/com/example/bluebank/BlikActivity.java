@@ -1,6 +1,7 @@
 package com.example.bluebank;
 
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -25,7 +26,7 @@ import okhttp3.Response;
 
 public class BlikActivity extends AppCompatActivity {
 
-    private final String BANK_URL = "http://192.168.0.102:8081/api/bank";
+    private final String BANK_URL = "http://192.168.0.138:8081/api/bank";
     private String accountNumber;
     private OkHttpClient client = new OkHttpClient();
 
@@ -39,6 +40,8 @@ public class BlikActivity extends AppCompatActivity {
     private Runnable pollingRunnable;
     private boolean isDialogShowing = false;
 
+    private Button przelewBlikButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +51,13 @@ public class BlikActivity extends AppCompatActivity {
         tvBlikCode = findViewById(R.id.tvBlikCode);
         tvTimer = findViewById(R.id.tvTimer);
         btnGenerateBlik = findViewById(R.id.btnGenerateBlik);
+        przelewBlikButton = findViewById(R.id.przelewBlikButton);
+
+        przelewBlikButton.setOnClickListener(v -> {
+            Intent intent = new Intent(BlikActivity.this, TransferActivity.class);
+            intent.putExtra("ACCOUNT_NUMBER", accountNumber); // Przekazujemy numer konta
+            startActivity(intent);
+        });
 
         btnGenerateBlik.setOnClickListener(v -> generateBlikCode());
 
@@ -197,6 +207,7 @@ public class BlikActivity extends AppCompatActivity {
             }
         });
     }
+
 
     @Override
     protected void onDestroy() {
