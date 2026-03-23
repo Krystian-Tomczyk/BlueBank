@@ -20,7 +20,7 @@ import java.io.IOException;
 public class LoginActivity extends AppCompatActivity {
 
     // ADRES IP TWOJEGO KOMPUTERA Z URUCHOMIONYM SPRING BOOT:
-    private final String BANK_URL = "http://192.168.0.102:8081/api/bank";
+    private final String BANK_URL = "http://192.168.0.138:8081/api/bank";
     private OkHttpClient client;
 
     @Override
