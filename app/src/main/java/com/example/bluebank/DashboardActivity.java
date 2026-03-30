@@ -25,7 +25,7 @@ import okhttp3.Response;
 
 public class DashboardActivity extends AppCompatActivity {
 
-    private final String BANK_URL = "http://192.168.0.138:8081/api/bank";
+    private final String BANK_URL = "http://192.168.0.173:8081/api/bank";
     private String accountNumber;
     private TextView tvBalance;
     private SwipeRefreshLayout swipeRefresh;

@@ -44,7 +44,7 @@ public class TransferActivity extends AppCompatActivity {
                 .build();
 
         Request request = new Request.Builder()
-                .url("http://192.168.0.138:8082/api/blik/transfer")
+                .url("http://192.168.0.173:8081/api/bank/blik/transfer")
                 .post(body)
                 .build();
 

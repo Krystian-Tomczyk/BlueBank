@@ -26,7 +26,7 @@ import okhttp3.Response;
 
 public class BlikActivity extends AppCompatActivity {
 
-    private final String BANK_URL = "http://192.168.0.138:8081/api/bank";
+    private final String BANK_URL = "http://192.168.0.173:8081/api/bank";
     private String accountNumber;
     private OkHttpClient client = new OkHttpClient();
 
