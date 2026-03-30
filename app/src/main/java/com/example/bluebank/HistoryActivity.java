@@ -21,7 +21,7 @@ import okhttp3.Response;
 
 public class HistoryActivity extends AppCompatActivity {
 
-    private final String HISTORY_URL = "http://192.168.0.173:8081/api/bank/transactions/";
+    private final String HISTORY_URL = AppConfig.BANK_URL + "/transactions/";
     private String accountNumber;
     private RecyclerView rvTransactionHistory;
     private TransactionAdapter adapter;
