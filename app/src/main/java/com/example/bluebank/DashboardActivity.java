@@ -1,6 +1,7 @@
 package com.example.bluebank;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -40,8 +41,10 @@ public class DashboardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
 
-        // 1. Pobranie numeru konta przekazanego przy logowaniu
-        accountNumber = getIntent().getStringExtra("ACCOUNT_NUMBER");
+        // 1. Pobranie numeru konta z SharedPreferences
+        SharedPreferences prefs = getSharedPreferences("AppPrefs", MODE_PRIVATE);
+        accountNumber = prefs.getString("ACCOUNT_NUMBER", null);
+        if(accountNumber==null) startActivity(new Intent(this, RegistrationActivity.class));
 
         // 2. Inicjalizacja widoków podstawowych
         tvBalance = findViewById(R.id.tvBalance);

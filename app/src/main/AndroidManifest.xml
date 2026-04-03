@@ -28,6 +28,9 @@
         <activity android:name=".TransferActivity" />
         <activity android:name=".HistoryActivity" />
         <activity android:name=".SettingsActivity" />
+        <activity android:name=".LoginActivity"/>
+        <activity android:name=".RegistrationActivity"/>
+        <activity android:name=".CardsActivity"/>
     </application>
 
 </manifest>
